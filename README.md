@@ -252,9 +252,21 @@ Unauthorized exploitation of live systems is strictly prohibited.
 
 ---
 
-## 13. Author
+# 13. Academic Submission Information
+This repository is prepared as part of SQL Injection Analysis and Digital Forensic coursework at Universitas Siliwangi (Sistem Informasi).
 
-Calon Presiden
+The objectives are:
+1. Identify SQLi vulnerability
+2. Execute SQL Injection attack
+3. Capture forensic logs
+4. Analyze authentication tampering
+5. Produce structured incident report (PDF)
+
+---
+
+## 14. Author
+
+Calon Presiden Negara Wakanda 4 Ever
 Information Systems 
 Universitas Siliwangi  
 2025
