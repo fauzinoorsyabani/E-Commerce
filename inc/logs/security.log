@@ -1,0 +1,18 @@
+[2025-11-25 17:09:35] [IP:127.0.0.1] LOGIN ATTEMPT → email='moemaneh@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='moemaneh@mail.com' AND status='Active'"
+[2025-11-25 17:09:35] [IP:127.0.0.1] FAILED LOGIN → email='moemaneh@mail.com' (NOT FOUND)
+[2025-11-25 17:09:49] [IP:127.0.0.1] LOGIN ATTEMPT → email='moemaneh@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='moemaneh@mail.com' AND status='Active'"
+[2025-11-25 17:09:49] [IP:127.0.0.1] FAILED LOGIN → email='moemaneh@mail.com' (NOT FOUND)
+[2025-11-25 17:10:27] [IP:127.0.0.1] LOGIN ATTEMPT → email='moemaneh@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='moemaneh@mail.com' AND status='Active'"
+[2025-11-25 17:10:27] [IP:127.0.0.1] FAILED LOGIN → email='moemaneh@mail.com' (NOT FOUND)
+[2025-11-25 17:10:45] [IP:127.0.0.1] LOGIN ATTEMPT → email='moemaneh@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='moemaneh@mail.com' AND status='Active'"
+[2025-11-25 17:10:45] [IP:127.0.0.1] FAILED LOGIN → email='moemaneh@mail.com' (NOT FOUND)
+[2025-11-25 17:11:38] [IP:127.0.0.1] LOGIN ATTEMPT → email='admin@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@mail.com' AND status='Active'"
+[2025-11-25 17:11:38] [IP:127.0.0.1] SUCCESS LOGIN via SQLi → email='admin@mail.com' | user_id=1
+[2025-11-25 17:13:23] [IP:127.0.0.1] LOGIN ATTEMPT → email='moemaneh@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='moemaneh@mail.com' AND status='Active'"
+[2025-11-25 17:13:23] [IP:127.0.0.1] SUCCESS LOGIN via SQLi → email='moemaneh@mail.com' | user_id=3
+[2025-11-25 17:34:13] [IP:127.0.0.1] LOGIN ATTEMPT → email='admin@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@mail.com' AND status='Active'"
+[2025-11-25 17:34:13] [IP:127.0.0.1] SUCCESS LOGIN via SQLi → email='admin@mail.com' | user_id=1
+[2025-11-25 17:59:47] | IP: 127.0.0.1 | ACTION: ADMIN LOGIN ATTEMPT email='admin@mail.com' | DETAILS: RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@mail.com' AND status='Active'" | AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0
+[2025-11-25 17:59:47] | IP: 127.0.0.1 | ACTION: ADMIN LOGIN SUCCESS email='admin@mail.com' | DETAILS: user_id=1 | AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0
+[2025-11-25 18:03:36] | IP: 127.0.0.1 | ACTION: ADMIN LOGIN ATTEMPT email='admin@mail.com' | DETAILS: RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@mail.com' AND status='Active'" | AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0
+[2025-11-25 18:03:36] | IP: 127.0.0.1 | ACTION: ADMIN LOGIN SUCCESS email='admin@mail.com' | DETAILS: user_id=1 | AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0

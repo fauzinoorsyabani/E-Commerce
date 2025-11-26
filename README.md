@@ -1,138 +1,261 @@
-## eCommerce-website-in-PHP
+# SQL Injection Demonstration, Forensic Logging, and Security Analysis on eCommerce Website (PHP)
 
-A fully functional project based on an Online  Ecommerce Website that uses PHP Language with  MySQL database. Following PHP  MySQL project contains all the essential features which can be in use for the final-year IT students for their college projects. It has a number of features that will allow users to manage products and shop online.
+## 1. Introduction
 
-<img width="949" alt="Screenshot 2024-07-09 130858" src="https://github.com/user-attachments/assets/7dd4bf52-7c73-44f1-83cb-58e828bc8142">
+This repository contains a modified version of an open-source PHP eCommerce Website, adapted specifically for academic and cybersecurity analysis. The purpose of this project is to identify, exploit, and analyze SQL Injection vulnerabilities found in the system, while implementing a complete forensic logging mechanism to track attack patterns and authentication behavior.
 
-## Technologies:
+The final objective includes:
+- Demonstrating SQL Injection attacks.
+- Capturing detailed logs of attempted and successful intrusions.
+- Enhancing security visibility through an admin-based log viewer.
+- Generating PDF-based forensic reports.
+- Providing structured documentation suitable for academic submission.
 
-HTML: Page layout and design
+This project is used strictly for educational purposes.
 
-CSS: Design
+---
 
-JS: Fontend
+## 2. Project Overview
 
-PHP: Backend
+The base application is a fully functional eCommerce website built using:
 
-Bootstrap
+- PHP (Backend)
+- MySQL (Database)
+- HTML/CSS (Frontend)
+- Bootstrap
+- JavaScript / jQuery
 
-Java Script
+The website includes customer-facing pages and a complete admin panel containing product management, order tracking, category management, shipping settings, profile management, and other eCommerce functionalities.
 
-## Supported Operating Systems:
-You can run this project in the following operating systems:
+This modified version includes additional components for security testing.
 
-Windows
+---
 
-MAC
+## 3. SQL Injection Vulnerability Analysis
 
-Linux
+### 3.1 Admin Login Vulnerability
 
-## Features:
+The original login mechanism used raw string concatenation:
 
-1-Client-Side Interaction.
+```php
+$query = "SELECT * FROM tbl_user WHERE email='$email' AND status='Active'";
+```
 
-2-Admin Panel.
+Issues identified:
+- No input sanitization.
+- No prepared statements or parameter binding.
+- Password validation bypassed due to insecure query construction.
 
-3-Customer Registration.
+### 3.2 Customer Login Vulnerability
 
-4-Add to Cart System.
+Similar pattern found in customer authentication:
 
-5-Checkout System.
+```php
+$query = "SELECT * FROM tbl_customer WHERE cust_email='$email'";
+```
 
-6-Update Billing Address.
+This allows direct SQL Injection through the email field.
 
-7-Search, Filter Products.
+### 3.3 Example SQL Injection Payloads
 
-8-Product Categories.
+To bypass admin login:
 
-9-Featured Products.
+```
+' OR 1=1 --
+```
 
-10-Latest Products.
+or
 
-11-Popular Products.
+```
+' OR 1=1 LIMIT 1 OFFSET 0 -- 
+```
 
-12-View Order History.
+The system grants access without validating the password.
 
-13-Update Customer Profile.
+---
 
-14-Manage Website Settings.
+## 4. Exploitation Impact
 
-15-Manage Shop Settings.
+By exploiting SQL Injection:
+1. Attackers can gain unauthorized access to the admin panel.
+2. Session data is created improperly.
+3. The system executes raw SQL without validation.
+4. Attackers can impersonate any registered user.
+5. Database content exposure may occur depending on payload complexity.
 
-16-Product Management.
+All these events are recorded using the custom logging system for forensic purposes.
 
-17-Order Management.
+---
 
-18-Pending Orders.
+## 5. Forensic Logging System
 
-19-Shippings.
+A dedicated logging system was implemented to capture:
+- Timestamp
+- IP Address
+- Login Attempt Type
+- SQL Query used (RAW SQL)
+- Success or Failure
+- Suspicious Inputs
 
-20-Set up Image Sliders.
+### 5.1 Logger for Admin Login
 
-21-Set Shipping Charges.
+A function named `write_log()` records activity:
 
-22-Page Settings.
+```php
+$file = dirname(__DIR__) . "/inc/logs/security.log";
+$log  = "[$time] [IP:$ip] $event";
+file_put_contents($file, $log, FILE_APPEND);
+```
 
-23-Set Social Media Links.
+### 5.2 Logger for Customer Login
 
-24-Subscribers.
+A separate logger exists in:
 
-25-View Registered Customers.
+```
+inc/logger.php
+```
 
-## Featured, Latest and Popular Products:.
+Both logging systems generate entries following a unified format.
 
-When it comes to projects such as  eCommerce, it is mandatory thing that a website should include these sections for user satisfaction. Not just satisfaction, it also helps to develop a two-way relationship between the end-users and the website.
+---
 
-<img width="939" alt="Screenshot 2024-07-18 155503" src="https://github.com/user-attachments/assets/5f725c04-157f-4ed9-aa73-13b1f9c35d4c">
+## 6. Security Log Viewer (Admin Panel)
 
-Speaking of it, the featured section helps the end-users to interact with their products, either way, to boost it up as well. This particular section tends to attract users to their featured products. Likewise, as the name itself suggest the latest products, it displays a certain number of recently added products on the client-side.
+A new page was integrated:
 
-<img width="951" alt="Screenshot 2024-07-18 155402" src="https://github.com/user-attachments/assets/22c78a1a-bd62-4473-b043-afbbe1986c51">
+```
+admin/logs.php
+```
 
-Similarly, this  eCommerce website project counts total views on a certain product in order to display under popular category. Meaning, all the most-viewed products are automatically listed under it. In fact, these sections are totally controllable by the system administrator including their number of display products.
+### Features:
+- Fully structured log parsing
+- Column-based filters:
+  - Timestamp
+  - IP Address
+  - Status (Success, Failed, Attempt)
+  - Details
+- Search and sorting using DataTables
+- Download raw log file
+- Clear log file
+- Export forensic report as PDF
 
-<img width="944" alt="Screenshot 2024-07-18 155612" src="https://github.com/user-attachments/assets/3f459e5b-adf1-4a67-9b1d-ec3586d83dba">
+This tool allows administrators to analyze attacks directly from the dashboard.
 
-## Cart, Product Category, View Customer’s Order and More:
+---
 
-Talking about the product category, the customers can simply switch product sections with a simple click. With it, the website displays all the available products under the requested category. For instance, clicking on the men’s section displays products related to men and so on.
+## 7. PDF Report Generation
 
-This whole website contains a system to top and end level navigation for easy user interaction within the website. Also, a cart system is available for the users in order to add products to it for the checkout procedure. Also, this particular section contains all the necessary features such as updating the cart, removing items, and more.
+A script named:
 
-<img width="946" alt="Screenshot 2024-07-18 155825" src="https://github.com/user-attachments/assets/e7023ca6-21a6-46de-9e99-433061b0fcc0">
+```
+admin/logs-pdf.php
+```
 
-## Admin Panel:
+Automatically generates a professional forensic report that includes:
+- Cover page
+- Summary
+- Full log table
+- Timestamped evidence entries
 
-Now moving towards the admin panel, an administrator has full control over the system. An admin has the right to manage the proper flow of the system. He/she can manage website settings, image sliders, products, orders, customers, and more. Speaking of website settings, it means an admin can update header-footer settings, website brandings, and other website details.
+This is used for academic documentation or incident reporting.
 
-Also, the admin has to manage shop settings such as color, size, shipping cost, categories. In-depth, the category refers to top, mid, and end level categories for displaying products. Each product needs to have a top, mid, and end level category just like a host for management of it. In fact, these are the exact point which displays under the website’s navigation bar. Besides, an administrator can manage image sliders, page settings, services sections for the client-side of things.
+---
 
-<img width="959" alt="Screenshot 2024-07-18 154915" src="https://github.com/user-attachments/assets/270be569-55dd-4be5-a9a4-9694984d9441">
+## 8. Directory Structure (Modified Files)
 
-## Installation:
+```
+/admin
+    login.php               ← Vulnerable login + admin logger
+    logs.php                ← Log viewer with DataTables
+    logs-pdf.php            ← PDF generator
 
-After Starting Apache and MySQL in XAMPP, follow the following steps:
+/inc
+    logger.php              ← Customer login logger
+    config.php              ← Database configuration
+    functions.php           ← Utility functions
+    /logs
+        security.log        ← Auto-generated forensic log
 
-1st Step: Extract file
+/database
+    ecommerceweb.sql        ← Main database file
+```
 
-2nd Step: Copy the main project folder
+---
 
-3rd Step: Paste in xampp/htdocs/
+## 9. Demonstration Steps
 
-Now Connecting Database 4th Step: Open a browser and go to URL “http://localhost/phpmyadmin/”
+### 9.1 Performing SQL Injection
+1. Navigate to the admin login page:
+   ```
+   /admin/login.php
+   ```
+2. Enter payload:
+   ```
+   ' OR 1=1 --
+   ```
+3. Leave password empty.
+4. Submit.
+5. Unauthorized admin access will be granted.
+6. System logs will record this event.
 
-5th Step: Click on the databases tab
+### 9.2 Viewing Logs
+Open:
 
-6th Step: Create a database named “ecommerceweb” and then click on the import tab
+```
+/admin/logs.php
+```
 
-7th Step: Click on browse file and select “ecommerceweb.sql” file which is inside “DATABASE” folder
+### 9.3 Generating PDF Report
+Open:
 
-8th Step: Click on go.
+```
+/admin/logs-pdf.php
+```
 
-After Creating Database,
+---
 
-9th Step: Open a browser and go to URL “http://localhost/eCommerce-website-in-PHP”
+## 10. Mitigation Recommendations
 
-Need Help or Customization?
+After testing, the system should be secured by:
+- Replacing all queries with PDO prepared statements.
+- Validating inputs using server-side sanitization.
+- Removing unnecessary SQLi testing bypasses.
+- Hashing passwords using `password_hash()`.
+- Implementing rate limiting on login endpoints.
+- Moving log files outside web-accessible directories.
 
-If you need assistance with setup, customization, or any other support, feel free to contact me. I’m here to help and provide the best solutions for your needs.
+---
+
+## 11. Installation Guide
+
+Follow these steps to run the system:
+
+1. Install Apache and MySQL (XAMPP, Laragon, or WAMP).
+2. Clone the repository into your web server directory.
+3. Import the database file (`ecommerceweb.sql`) into phpMyAdmin.
+4. Configure database credentials in:
+   ```
+   inc/config.php
+   ```
+5. Access the application via:
+   ```
+   http://localhost/eCommerce-website-in-PHP/
+   ```
+
+---
+
+## 12. Disclaimer
+
+This project is intended for cybersecurity training and academic research only.  
+It must not be used in a production environment without security hardening.  
+Unauthorized exploitation of live systems is strictly prohibited.
+
+---
+
+## 13. Author
+
+Calon Presiden
+Information Systems 
+Universitas Siliwangi  
+2025
+

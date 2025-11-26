@@ -1,0 +1,12 @@
+[2025-11-25 05:01:13] [IP:127.0.0.1] LOGIN ATTEMPT → email='admin@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@mail.com' AND status='Active'"
+[2025-11-25 05:01:13] [IP:127.0.0.1] SUCCESS LOGIN via SQLi → email='admin@mail.com' | user_id=1
+[2025-11-25 06:50:46] [IP:127.0.0.1] LOGIN ATTEMPT → email='admin@gmail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@gmail.com' AND status='Active'"
+[2025-11-25 06:50:46] [IP:127.0.0.1] FAILED LOGIN → email='admin@gmail.com' (NOT FOUND)
+[2025-11-25 06:51:03] [IP:127.0.0.1] LOGIN ATTEMPT → email='admin@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@mail.com' AND status='Active'"
+[2025-11-25 06:51:03] [IP:127.0.0.1] SUCCESS LOGIN via SQLi → email='admin@mail.com' | user_id=1
+[2025-11-25 06:58:11] [IP:127.0.0.1] LOGIN ATTEMPT → email='ozi@gmail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='ozi@gmail.com' AND status='Active'"
+[2025-11-25 06:58:11] [IP:127.0.0.1] FAILED LOGIN → email='ozi@gmail.com' (NOT FOUND)
+[2025-11-25 06:58:27] [IP:127.0.0.1] LOGIN ATTEMPT → email='admin@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@mail.com' AND status='Active'"
+[2025-11-25 06:58:27] [IP:127.0.0.1] SUCCESS LOGIN via SQLi → email='admin@mail.com' | user_id=1
+[2025-11-25 07:06:32] [IP:127.0.0.1] LOGIN ATTEMPT → email='admin@mail.com' | RAW_SQL="SELECT * FROM tbl_user WHERE email='admin@mail.com' AND status='Active'"
+[2025-11-25 07:06:32] [IP:127.0.0.1] SUCCESS LOGIN via SQLi → email='admin@mail.com' | user_id=1

@@ -2147,3 +2147,12 @@ div.pagination span.disabled {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.label {
+    font-size: 12px;
+    margin-right: 4px;
+}
+td {
+    font-size: 13px;
+    line-height: 1.4;
+}
