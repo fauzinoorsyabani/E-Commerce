@@ -266,7 +266,7 @@ The objectives are:
 
 ## 14. Author
 
-Calon Presiden Negara Wakanda 4 Ever
+Fauzi Noorsyabani
 Information Systems 
 Universitas Siliwangi  
 2025
